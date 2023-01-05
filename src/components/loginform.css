@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+   
+}
+
+.page {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("https://th.bing.com/th/id/R.8bdc9adb0c75ed0cc67a9b4fe1a6e8a1?rik=xvMK5aTrlwKAeQ&riu=http%3a%2f%2f1.bp.blogspot.com%2f_lj_y7Z_fw94%2fS8eTqaNa5vI%2fAAAAAAAABOE%2f5nGpXDvl4Sc%2fs1600%2fPig%2bCartoon%2bClipart.png&ehk=1nNd3PQn%2fMJ3Ux7s4xZXac6Kv74c4Wu3TcSY%2ffAnDfE%3d&risl=&pid=ImgRaw&r=0"
+    ) ;
+    background-size: 150px;
+
+    
+}
+
+.cover {
+    background-color: rgb(220, 212, 212);
+    width: 50em;
+    height: 35em;
+    position: relative;
+    border-radius: 2em;
+    box-shadow: 0 0.188em 1.550em  rgb(156, 156, 156);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+
+}
+
+.alt-login {
+    width: 50%;
+    height: 3em;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.alt-login div {
+    width: 25%;
+    height: 90%;
+    border-radius: 0.25em;
+    background-color: black;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+
+}
+
+.google {background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png");}
+.facebook {background-image: url("https://www.hrkatha.com/wp-content/uploads/Facebook-1.png") ;}
+
+input {
+    border: none;
+    background-color: rgb(241, 237, 237);
+    height: 4em;
+    width: 80%;
+    border-radius: 0.50em;
+    text-align: center;
+    padding: 2em;
+}
+
+input:focus {
+    outline-color: rgb(32, 177, 255);
+}
+
+.login-btn {
+    width: 40%;
+    height: 3em;
+    background-color: rgb(32, 177, 255);
+    display: flex;
+    justify-content: center;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    cursor: pointer;
+
+
+}
+
+.login-btn:hover { transform: scale(1.52);}
+
+.text {
+    position: relative;
+    bottom: -2em;
+
+}
+
+.hide {
+    position: absolute;
+    transform: scale(0);
+     
+}
+
+.login-popup {
+    position: absolute;
+    height: 30em;
+    width: 30em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25em;
+    background-color: black;
+    color: rgb(125, 59, 26);
+    bottom: 0;
+    transform: scale(1);
+    transform: 1,5s;
+
+}
+
+.pig {
+    display: flex;
+}
