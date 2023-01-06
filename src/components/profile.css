@@ -1,6 +1,6 @@
-.card {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.pic-container {
+    display:block;
+    margin: auto;
+    
     
 }

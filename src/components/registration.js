@@ -46,6 +46,7 @@ const RegistrationForm = ({ setAuth }) => {
                 //localstorage
                 localStorage.setItem("token", parseRes.token)
                 setAuth(true)
+                console.log("registration")
             } else {
                 setAuth(false)
                 console.log("Something wrong")
@@ -56,52 +57,56 @@ const RegistrationForm = ({ setAuth }) => {
         }
     }
 
+    
+
     return (
-        <div className="cover">
-            <h1>Register</h1>
-            <form onSubmit={onSubmitForm}>
+        <div className="page">
+            <div className="cover">
+                <h1>Register</h1>
+                <form onSubmit={onSubmitForm}>
+                <input 
+                        type="text" 
+                        placeholder="name"
+                        name="name" 
+                        value={name} 
+                        onChange={e => onChange(e)} />
             <input 
-                    type="text" 
-                    placeholder="name"
-                    name="name" 
-                    value={name} 
-                    onChange={e => onChange(e)} />
-          <input 
-                    type="text" 
-                    placeholder="email"
-                    name="email" 
-                    value={email} 
-                    onChange={e => onChange(e)} />
-                    
-                    
+                        type="text" 
+                        placeholder="email"
+                        name="email" 
+                        value={email} 
+                        onChange={e => onChange(e)} />
+                        
+                        
 
-            <input 
-                    type="password" 
-                    placeholder="enter your password"
-                    name="password" 
-                    value={password} 
-                    onChange={e => onChange(e)} />
-                    <button type="submit" className="login-btn" onClick={popup}>Register</button>
+                <input 
+                        type="password" 
+                        placeholder="enter your password"
+                        name="password" 
+                        value={password} 
+                        onChange={e => onChange(e)} />
+                        <button type="submit" className="login-btn" onClick={popup}>Register</button>
 
-                    
-            </form>
+                        
+                </form>
 
-            <p className="text">OR REGISTER USING</p>
+                <p className="text">OR REGISTER USING</p>
 
-            <div className="alt-login">
-                <div className="facebook"></div>
-                <div className="google"></div>
+                <div className="alt-login">
+                    <div className="facebook"></div>
+                    <div className="google"></div>
+
+                </div>
+                
+
+                
+
+                <div className={popupStyle}>
+                    <h3>Login Succesfull</h3>
+                    <p>Congrats</p>
+                </div>
 
             </div>
-              
-
-            
-
-            <div className={popupStyle}>
-                <h3>Login Succesfull</h3>
-                <p>Congrats</p>
-            </div>
-
         </div>
     )
 }

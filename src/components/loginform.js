@@ -57,40 +57,42 @@ const LoginForm = ({ setAuth }) => {
     }
 
     return (
-        <div className="cover">
-            <h1>Login</h1>
-           
-            <form onSubmit={onSubmitForm}>
-              
+        <div className="page">
+            <div className="cover">
+                <h1>Login</h1>
+            
+                <form onSubmit={onSubmitForm}>
+                
+                <input 
+                        type="text" 
+                        placeholder="email"
+                        name="email" 
+                        value={email} 
+                        onChange={e => onChange(e)} />
             <input 
-                    type="text" 
-                    placeholder="email"
-                    name="email" 
-                    value={email} 
-                    onChange={e => onChange(e)} />
-          <input 
-                    type="password" 
-                    placeholder="enter your password"
-                    name="password" 
-                    value={password} 
-                    onChange={e => onChange(e)} />
-                    <button type="submit" className="login-btn" onClick={popup}>LOGIN</button>
-            </form>
-              
+                        type="password" 
+                        placeholder="enter your password"
+                        name="password" 
+                        value={password} 
+                        onChange={e => onChange(e)} />
+                        <button type="submit" className="login-btn" onClick={popup}>LOGIN</button>
+                </form>
+                
 
-            <p className="text">OR LOGIN USING</p>
+                <p className="text">OR LOGIN USING</p>
 
-            <div className="alt-login">
-                <div className="facebook"></div>
-                <div className="google"></div>
+                <div className="alt-login">
+                    <div className="facebook"></div>
+                    <div className="google"></div>
+
+                </div>
+
+            {/* div className={popupStyle}>
+                    <h3>Login Failed</h3>
+                    <p> <Username or password incorrect</p>
+                </div> */}
 
             </div>
-
-           {/* div className={popupStyle}>
-                <h3>Login Failed</h3>
-                <p> <Username or password incorrect</p>
-            </div> */}
-
         </div>
     )
 }

@@ -22,7 +22,8 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate
+  Navigate,
+  useNavigate
 } from "react-router-dom";
 import Login from './components/loginform';
 import Register from './components/registration';
@@ -30,6 +31,7 @@ import Profile from './components/profile';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false) // set to false when done (para d login ng login)
+  const navigate = useNavigate()
 
   const setAuth = boolean => {
 
@@ -39,12 +41,18 @@ function App() {
 //authenticated ? renderApp() : renderLogin();
   return (
     //router to redirect and check authentication
-    <div className="App">
 
-      <Router>
+  
+    <div className="App">
+      <nav>
+        <button onClick={()=>navigate("/login")}>Login</button>
+        <button onClick={()=>navigate("/register")}>Register</button>
+      </nav>
+       
+     <div className="pahina">
         <div>
           <Routes>
-            <Route path="/" element={<p>Hello world!</p>} />
+            <Route path="/" element={<p>Dashboard dapat!</p>} />
             <Route exact path='/login' element={!isAuthenticated ? (<Login setAuth={setAuth}/> ): (
               <Navigate to='/profile'/>
             ) } ></Route>
@@ -56,9 +64,14 @@ function App() {
             ) }></Route>
           </Routes>
         </div>
-      </Router>
+      
+      
+    </div>
+    
+      
     </div>
   );
 }
+
 
 export default App;

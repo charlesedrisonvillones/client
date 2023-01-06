@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './profile.css';
 
 
 
@@ -48,7 +49,7 @@ return (
     <>
         <div className="card" style={{ width: 18 + 'rem' }}>
             <div className="pic-container">
-                <img className="" src="https://media.licdn.com/dms/image/C5103AQFcpNGDcSRcDA/profile-displayphoto-shrink_800_800/0/1553566992650?e=1678320000&v=beta&t=LNED6pgc7gH5PC2i-U3DQlfLSa29Sbv_iOJgoNHuBH8" className="card-img-top" alt="..." />
+                <img src="https://media.licdn.com/dms/image/C5103AQFcpNGDcSRcDA/profile-displayphoto-shrink_800_800/0/1553566992650?e=1678320000&v=beta&t=LNED6pgc7gH5PC2i-U3DQlfLSa29Sbv_iOJgoNHuBH8" className="card-img-top" alt="..." />
             </div>
             <div>
                 <h1>CHARLES EDRISON VILLONES</h1>
