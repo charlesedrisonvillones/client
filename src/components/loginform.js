@@ -44,9 +44,10 @@ const LoginForm = ({ setAuth }) => {
             if (parseRes.token) {
                 //localstorage
                 localStorage.setItem("token", parseRes.token)
+                setAuth(true) 
                 console.log("login")
             } else {
-                
+                setAuth(false)
                 console.log("Something wrong")
             }
 

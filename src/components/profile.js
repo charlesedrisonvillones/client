@@ -47,13 +47,17 @@ return (
 
     <>
         <div className="card" style={{ width: 18 + 'rem' }}>
-            <h1>This is a dashboard</h1>
-            {/* <UploadPhoto /> */}
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" className="card-img-top" alt="..." />
-            <div className="card-body">
-                <h5 className="card-title">{name}</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
+            <div className="pic-container">
+                <img className="" src="https://media.licdn.com/dms/image/C5103AQFcpNGDcSRcDA/profile-displayphoto-shrink_800_800/0/1553566992650?e=1678320000&v=beta&t=LNED6pgc7gH5PC2i-U3DQlfLSa29Sbv_iOJgoNHuBH8" className="card-img-top" alt="..." />
+            </div>
+            <div>
+                <h1>CHARLES EDRISON VILLONES</h1>
+                <h2>FARM OWNER</h2>
+            </div>
+            <div>
+                <button>set status</button>
+                <button>edit profile</button>
+                <button>more</button>
             </div>
         </div>
 
