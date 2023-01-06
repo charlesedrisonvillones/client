@@ -62,33 +62,40 @@ const RegistrationForm = ({ setAuth }) => {
             <form onSubmit={onSubmitForm}>
             <input 
                     type="text" 
+                    placeholder="name"
                     name="name" 
                     value={name} 
                     onChange={e => onChange(e)} />
           <input 
                     type="text" 
-                    name="password" 
-                    value={password} 
-                    onChange={e => onChange(e)} />
-
-<input 
-                    type="text" 
+                    placeholder="email"
                     name="email" 
                     value={email} 
+                    onChange={e => onChange(e)} />
+                    
+                    
+
+            <input 
+                    type="password" 
+                    placeholder="enter your password"
+                    name="password" 
+                    value={password} 
                     onChange={e => onChange(e)} />
                     <button type="submit" className="login-btn" onClick={popup}>Register</button>
 
                     
             </form>
-              
 
-            <p className="text">OR LOGIN USING</p>
+            <p className="text">OR REGISTER USING</p>
 
             <div className="alt-login">
                 <div className="facebook"></div>
                 <div className="google"></div>
 
             </div>
+              
+
+            
 
             <div className={popupStyle}>
                 <h3>Login Succesfull</h3>

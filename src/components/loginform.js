@@ -58,14 +58,18 @@ const LoginForm = ({ setAuth }) => {
     return (
         <div className="cover">
             <h1>Login</h1>
+           
             <form onSubmit={onSubmitForm}>
+              
             <input 
                     type="text" 
+                    placeholder="email"
                     name="email" 
                     value={email} 
                     onChange={e => onChange(e)} />
           <input 
-                    type="text" 
+                    type="password" 
+                    placeholder="enter your password"
                     name="password" 
                     value={password} 
                     onChange={e => onChange(e)} />

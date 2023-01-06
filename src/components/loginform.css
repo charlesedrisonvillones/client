@@ -18,7 +18,7 @@
 }
 
 .cover {
-    background-color: rgb(220, 212, 212);
+    background-color: rgb(232, 213, 213);
     width: 50em;
     height: 35em;
     position: relative;
@@ -56,13 +56,15 @@
 .facebook {background-image: url("https://www.hrkatha.com/wp-content/uploads/Facebook-1.png") ;}
 
 input {
-    border: none;
-    background-color: rgb(241, 237, 237);
+    border:rgb(156, 156, 156);
+    border-style:double;
+    background-color: rgb(244, 233, 233);
     height: 4em;
     width: 80%;
     border-radius: 0.50em;
     text-align: center;
-    padding: 2em;
+    padding: .9em;
+    
 }
 
 input:focus {
@@ -70,10 +72,10 @@ input:focus {
 }
 
 .login-btn {
-    width: 40%;
+    width: 80%;
     height: 3em;
     background-color: rgb(32, 177, 255);
-    display: flex;
+    display: center;
     justify-content: center;
     transition: 0.5s;
     border-radius: 0.25em;
