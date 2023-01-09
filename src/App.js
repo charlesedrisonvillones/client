@@ -30,7 +30,7 @@ import Register from './components/registration';
 import Profile from './components/profile';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false) // set to false when done (para d login ng login)
+  const [isAuthenticated, setIsAuthenticated] = useState(true) // set to false when done (para d login ng login)
   const navigate = useNavigate()
 
   const setAuth = boolean => {

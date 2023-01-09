@@ -1,6 +1,29 @@
 .pic-container {
     display:block;
     margin: auto;
+    border-radius: 50%;
     
     
+}
+
+.card {
+    display:block;
+    margin: auto;
+    
+    
+}
+
+img {
+    display:block;
+    margin: auto;
+    border-radius: 50%
+}
+
+body {
+    background-image: url(6071843.jpg);
+    background-repeat: repeat-x;
+}
+
+.homepage {
+    background-image: url(6071843.jpg);
 }

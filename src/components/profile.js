@@ -4,9 +4,27 @@ import './profile.css';
 
 
 
+
 const Dashboard = ({ setAuth }) => {
     const [name, setName] = useState("");
-
+    const [pigs, setPigs] = useState ([])
+    const getPigs = async () => {
+        try { 
+            const response = await fetch(
+                "http://localhost:8000/pigs",{
+                    method: "GET",
+                    headers: { Authorization:localStorage.getItem('token') }
+                }
+           
+            )
+            const parseRes = await response.json();
+            console.log(parseRes)
+            setPigs(parseRes)
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
     const getProfile = async () => {
         try {
             //fetch api that uses the GET method
@@ -15,11 +33,11 @@ const Dashboard = ({ setAuth }) => {
                 {
                     method: "GET",
                     //retrieving the token and putting it in the Auth header
-                    headers: { Authorization: "Bearer" + localStorage.getItem('token') }
+                    headers: { Authorization:localStorage.getItem('token') }
                 })
             //parsing the json back to a JS object
             const parseRes = await response.json();
-            setName(parseRes.username);
+            setName(parseRes.user_name);
 
         } catch (error) {
             console.log(error.message)
@@ -38,8 +56,10 @@ const logout = async (e) => {
     }
 }
 
+
 useEffect(() => {
     getProfile();
+    getPigs();
 }, [])
 
 
@@ -48,11 +68,12 @@ return (
 
     <>
         <div className="card" style={{ width: 18 + 'rem' }}>
-            <div className="pic-container">
+   
+        <div className="pic-container">
                 <img src="https://media.licdn.com/dms/image/C5103AQFcpNGDcSRcDA/profile-displayphoto-shrink_800_800/0/1553566992650?e=1678320000&v=beta&t=LNED6pgc7gH5PC2i-U3DQlfLSa29Sbv_iOJgoNHuBH8" className="card-img-top" alt="..." />
             </div>
             <div>
-                <h1>CHARLES EDRISON VILLONES</h1>
+                <h1>{name}</h1>
                 <h2>FARM OWNER</h2>
             </div>
             <div>
@@ -65,11 +86,15 @@ return (
         
         <br></br>
         <br></br>
+
+     
     
-        {/* <Tweets /> */}
+        <div>{pigs.map(pig => {
+            return <li>{pig.name}</li>
+        } )}</div>
         <button onClick={logout} className="btn btn-primary btn-block mb-4">Sign Out</button>
     </>
-
+   
 
 )}
 
