@@ -7,24 +7,7 @@ import './profile.css';
 
 const Dashboard = ({ setAuth }) => {
     const [name, setName] = useState("");
-    const [pigs, setPigs] = useState ([])
-    const getPigs = async () => {
-        try { 
-            const response = await fetch(
-                "http://localhost:8000/pigs",{
-                    method: "GET",
-                    headers: { Authorization:localStorage.getItem('token') }
-                }
-           
-            )
-            const parseRes = await response.json();
-            console.log(parseRes)
-            setPigs(parseRes)
-            
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    
     const getProfile = async () => {
         try {
             //fetch api that uses the GET method
@@ -59,7 +42,8 @@ const logout = async (e) => {
 
 useEffect(() => {
     getProfile();
-    getPigs();
+   
+    
 }, [])
 
 
@@ -89,9 +73,7 @@ return (
 
      
     
-        <div>{pigs.map(pig => {
-            return <li>{pig.name}</li>
-        } )}</div>
+       
         <button onClick={logout} className="btn btn-primary btn-block mb-4">Sign Out</button>
     </>
    

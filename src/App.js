@@ -28,6 +28,7 @@ import {
 import Login from './components/loginform';
 import Register from './components/registration';
 import Profile from './components/profile';
+import DisplayPigs from './components/displayPigs';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(true) // set to false when done (para d login ng login)
@@ -62,6 +63,8 @@ function App() {
             <Route exact path='/profile' element={isAuthenticated ? (<Profile setAuth={setAuth}/> ): (
               <Navigate to='/login'/>
             ) }></Route>
+            <Route exact path='/pigs' element={<DisplayPigs/>}> </Route>
+        
           </Routes>
         </div>
       
