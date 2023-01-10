@@ -29,6 +29,8 @@ import Login from './components/loginform';
 import Register from './components/registration';
 import Profile from './components/profile';
 import DisplayPigs from './components/displayPigs';
+import DisplayFeeds from './components/displayFeeds';
+import DisplayMedicines from './components/displayMedicines';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(true) // set to false when done (para d login ng login)
@@ -64,7 +66,8 @@ function App() {
               <Navigate to='/login'/>
             ) }></Route>
             <Route exact path='/pigs' element={<DisplayPigs/>}> </Route>
-        
+            <Route exact path='/feeds' element={<DisplayFeeds/>}> </Route>
+            <Route exact path='/medicines' element={<DisplayMedicines/>}> </Route>
           </Routes>
         </div>
       
