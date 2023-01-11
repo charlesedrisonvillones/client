@@ -6,7 +6,8 @@ import './displayMedicines.css';
 const DisplayMedicines = () => {
     const [medicines, setMedicines] = useState ([])
     const [inputs, setInputs] = useState({
-        medicine: ""
+        name: "",
+        stock: 0
         
 
     });
@@ -36,7 +37,7 @@ const DisplayMedicines = () => {
         e.preventDefault()
         try {
 
-            const body = { medicine }
+            const body = { name: inputs.name, stocks: inputs.stock }
             console.log(body)
             const response = await fetch(
                 "http://localhost:8000/medicines",{
@@ -49,6 +50,7 @@ const DisplayMedicines = () => {
 
             )
             const parseRes= await response.json()
+            setMedicines(curMedicines => [...curMedicines, {name: inputs.name, stocks: inputs.stock}])
             console.log(parseRes)
             
            
@@ -64,21 +66,34 @@ const DisplayMedicines = () => {
         <div className="display2">
             HELLO MEDICINES
            
-            <form onSubmit={addMedicines}>
-                <input  type="text" 
-                        placeholder="medicine"
-                        name="medicine" 
-                        value={medicine} 
-                        onChange={e => onChange(e)} />
-               
+            <form className="add-medicine" onSubmit={addMedicines}>
+                <input type="text"
+                       placeholder="medicine name"
+                       name="name"
+                       value={inputs.name}
+                       onChange={e => onChange(e)} />
 
-                
+                <input type="integer"
+                       placeholder="stock"
+                       name="stock"
+                       value={inputs.stock}
+                       onChange={e => onChange(e)} />
                 <button type="submit">add</button>
-            </form>
-            <div>{medicines.map(medicine => {
-            return <li><h1>{medicine.name}</h1></li>
 
-        } )}</div>
+            </form>
+            <div className="medicine-container">
+                {medicines.map(medicine => {
+                 return (
+                    <div className="medicine-item"> 
+                        <h4 className="medicine-name">{medicine.name}</h4>
+                        <div className="medicine-stocks">{medicine.stocks}</div>
+                        <button className="editbtn" type="submit">edit</button> 
+                    </div>
+                 )
+                } )}
+            </div>
+            
+            
         </div>
     )
 }
