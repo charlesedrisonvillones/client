@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import './displayFeeds.css';
 
 const DisplayFeeds = () => {
+    // const [stock, setStocks] = useState([])
     const [feeds, setFeeds] = useState ([])
     const [inputs, setInputs] = useState({
-        feed: ""
+        name: "",
+        stock: 0
     });
 
     const onChange = e => {
         setInputs({ ...inputs, [e.target.name]: e.target.value})
     };
 
-    const {feed} = inputs
     const getFeeds = async () => {
         try {
             const response = await fetch (
@@ -32,7 +33,7 @@ const DisplayFeeds = () => {
         e.preventDefault()
         try {
 
-            const body = { feed }
+            const body = { name: inputs.name, stocks: inputs.stock }
             console.log(body)
             const response = await fetch (
                 "http://localhost:8000/feeds",{
@@ -43,6 +44,7 @@ const DisplayFeeds = () => {
                 }
             )
             const parseRes = await response.json()
+            setFeeds(curFeeds => [...curFeeds, { name: inputs.name, stocks: inputs.stock }])
             console.log(parseRes)
         
         } catch (error) {
@@ -58,20 +60,34 @@ const DisplayFeeds = () => {
         <div className ="display1">
             HELLO FEEDS
 
-            <form onSubmit={addFeeds}>
+            <form className="add-feeds" onSubmit={addFeeds}>
                 <input type="text"
-                       placeholder="feed"
-                       name="feed"
-                       value={feed}
+                       placeholder="feed name"
+                       name="name"
+                       value={inputs.name}
                        onChange={e => onChange(e)} />
 
+                <input type="integer"
+                       placeholder="stock"
+                       name="stock"
+                       value={inputs.stock}
+                       onChange={e => onChange(e)} />
                 <button type="submit">add</button>
-            </form>
-            <div>{feeds.map(feed => {
-                return <li><h1>{feed.name}</h1></li>
 
-            } )}</div>
+            </form>
+
+            <div className="feed-container">
+                {feeds.map(feed => {
+                 return (
+                    <div className="feed-item"> 
+                        <h4 className="feed-name">{feed.name}</h4>
+                        <div className="feed-stocks">{feed.stocks}</div>
+                        <button className="editbtn" type="submit">edit</button> 
+                    </div>
+                 )
+                } )}
             </div>
+        </div>
     )
 
 }

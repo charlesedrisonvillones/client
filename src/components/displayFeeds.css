@@ -1,4 +1,31 @@
-.display1 {
-    color: white;
+.display2 {
+    color: rgb(214, 202, 202);
     text-align: center;
+    
+}
+
+.add-feeds {
+    display: flex;
+    flex-direction: row;
+}
+
+.feed-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(203 213 225);
+}
+
+.feed-item {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+    padding: 20px;
+    background-color: rgb(248 250 252);
+    border-radius: 12px;
+}
+
+.feed-item > * {
+    flex-grow: 1;
+    padding: 10px;
 }
