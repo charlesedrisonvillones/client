@@ -11,6 +11,9 @@ const DisplayMedicines = () => {
         
 
     });
+
+    const[editable, setEditable] = useState([])
+
     const onChange = e => {    
         setInputs({ ...inputs, [e.target.name]: e.target.value })
     };
@@ -25,6 +28,9 @@ const DisplayMedicines = () => {
            
             )
             const parseRes = await response.json();
+            const medicinesLength = parseRes.length;
+            const medicineEditable = new Array(medicinesLength).fill("false");
+            setEditable(medicineEditable);
             console.log(parseRes)
             setMedicines(parseRes)
             
@@ -62,6 +68,15 @@ const DisplayMedicines = () => {
     useEffect(() => {
         getMedicines();
     },[])
+
+    const fn = index => {
+        let newEditable = editable.slice();
+        console.log(index); 
+        newEditable[index] = "true";
+        console.log(editable);
+        setEditable(newEditable);
+        console.log(editable);
+    }
     return (
         <div className="display2">
             HELLO MEDICINES
@@ -82,12 +97,12 @@ const DisplayMedicines = () => {
 
             </form>
             <div className="medicine-container">
-                {medicines.map(medicine => {
+                {medicines.map((medicine, index) => {
                  return (
                     <div className="medicine-item"> 
-                        <h4 className="medicine-name">{medicine.name}</h4>
-                        <div className="medicine-stocks">{medicine.stocks}</div>
-                        <button className="editbtn" type="submit">edit</button> 
+                        <h4 contenteditable={editable[index]} className="medicine-name">{medicine.name}</h4>
+                        <div contenteditable={editable[index]} className="medicine-stocks">{medicine.stocks}</div>
+                        <button className="editbtn" type="submit" onClick={e => fn(index)}>edit</button> 
                     </div>
                  )
                 } )}

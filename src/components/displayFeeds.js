@@ -8,6 +8,10 @@ const DisplayFeeds = () => {
         name: "",
         stock: 0
     });
+    const[editable, setEditable] = useState([])
+        
+   
+
 
     const onChange = e => {
         setInputs({ ...inputs, [e.target.name]: e.target.value})
@@ -22,6 +26,9 @@ const DisplayFeeds = () => {
                 }
             )
             const parseRes = await response.json();
+            const feedsLength = parseRes.length;
+            const feedEditable = new Array(feedsLength).fill("false");
+            setEditable(feedEditable);
             console.log(parseRes)
             setFeeds(parseRes)
         } catch (error) {
@@ -56,6 +63,16 @@ const DisplayFeeds = () => {
         getFeeds();
     },[])
 
+  
+    const fn = index => {
+        let newEditable = editable.slice();
+        console.log(index); 
+        newEditable[index] = "true";
+        console.log(editable);
+        setEditable(newEditable);
+        console.log(editable);
+    };
+
     return (
         <div className ="display1">
             HELLO FEEDS
@@ -77,12 +94,12 @@ const DisplayFeeds = () => {
             </form>
 
             <div className="feed-container">
-                {feeds.map(feed => {
+                {feeds.map((feed, index) => {
                  return (
                     <div className="feed-item"> 
-                        <h4 className="feed-name">{feed.name}</h4>
-                        <div className="feed-stocks">{feed.stocks}</div>
-                        <button className="editbtn" type="submit">edit</button> 
+                        <h4 contenteditable={editable[index]} className="feed-name">{feed.name}</h4>
+                        <div contenteditable={editable[index]} className="feed-stocks">{feed.stocks}</div>
+                        <button  className="editbtn" type="submit" onClick={e => fn(index)}>edit</button> 
                     </div>
                  )
                 } )}
