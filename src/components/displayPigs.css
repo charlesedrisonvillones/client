@@ -2,3 +2,14 @@
     color: white;
     text-align: center;
 }
+
+.pig-list {
+    display:flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+}
+
+.pig-item {
+    width: 20%;
+    margin: 12px;
+}

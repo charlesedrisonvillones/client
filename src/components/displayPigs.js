@@ -75,8 +75,8 @@ const DisplayPigs = () => {
                 
                 <button type="submit">add</button>
             </form>
-            <div>{pigs.map(pig => {
-            return <li><h1>{pig.name}</h1></li>
+            <div className="pig-list">{pigs.map(pig => {
+            return <li className="pig-item"><h1>{pig.name}</h1></li>
 
         } )}</div>
         </div>

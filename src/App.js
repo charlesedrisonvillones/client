@@ -31,6 +31,7 @@ import Profile from './components/profile';
 import DisplayPigs from './components/displayPigs';
 import DisplayFeeds from './components/displayFeeds';
 import DisplayMedicines from './components/displayMedicines';
+import Dashboard from './components/Dashboard';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(true) // set to false when done (para d login ng login)
@@ -47,11 +48,7 @@ function App() {
 
   
     <div className="App">
-      <nav>
-        <button onClick={()=>navigate("/login")}>Login</button>
-        <button onClick={()=>navigate("/register")}>Register</button>
-      </nav>
-       
+      
      <div className="pahina">
         <div>
           <Routes>
@@ -68,6 +65,7 @@ function App() {
             <Route exact path='/pigs' element={<DisplayPigs/>}> </Route>
             <Route exact path='/feeds' element={<DisplayFeeds/>}> </Route>
             <Route exact path='/medicines' element={<DisplayMedicines/>}> </Route>
+            <Route exact path='/Dashboard' element={<Dashboard />}> </Route>
           </Routes>
         </div>
       
