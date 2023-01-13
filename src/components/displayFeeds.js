@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './displayFeeds.css';
+import Feed from "./Feed";
 
 const DisplayFeeds = () => {
     // const [stock, setStocks] = useState([])
@@ -97,9 +98,7 @@ const DisplayFeeds = () => {
                 {feeds.map((feed, index) => {
                  return (
                     <div className="feed-item"> 
-                        <h4 contenteditable={editable[index]} className="feed-name">{feed.name}</h4>
-                        <div contenteditable={editable[index]} className="feed-stocks">{feed.stocks}</div>
-                        <button  className="editbtn" type="submit" onClick={e => fn(index)}>edit</button> 
+                        <Feed id={feed.name_id} stocks={feed.stocks} name={feed.name}/>
                     </div>
                  )
                 } )}

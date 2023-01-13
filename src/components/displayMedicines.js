@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './displayMedicines.css';
-
+import Medicine from "./Medicine";
 
 
 const DisplayMedicines = () => {
@@ -100,18 +100,18 @@ const DisplayMedicines = () => {
                 {medicines.map((medicine, index) => {
                  return (
                     <div className="medicine-item"> 
-                        <h4 contenteditable={editable[index]} className="medicine-name">{medicine.name}</h4>
-                        <div contenteditable={editable[index]} className="medicine-stocks">{medicine.stocks}</div>
-                        <button className="editbtn" type="submit" onClick={e => fn(index)}>edit</button> 
+                        <Medicine id={medicine.name_id} stocks={medicine.stocks} name={medicine.name}/>
                     </div>
                  )
                 } )}
             </div>
+               
+            </div>
             
-            
-        </div>
     )
+    
 }
+
 
 
 
