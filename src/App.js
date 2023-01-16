@@ -34,7 +34,7 @@ import DisplayMedicines from './components/displayMedicines';
 import Dashboard from './components/Dashboard';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true) // set to false when done (para d login ng login)
+  const [isAuthenticated, setIsAuthenticated] = useState(false) // set to false when done (para d login ng login)
   const navigate = useNavigate()
 
   const setAuth = boolean => {
@@ -42,6 +42,7 @@ function App() {
     setIsAuthenticated(boolean)
 
   }
+  console.log(isAuthenticated)
 //authenticated ? renderApp() : renderLogin();
   return (
     //router to redirect and check authentication

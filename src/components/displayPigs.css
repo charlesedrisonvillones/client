@@ -1,15 +1,33 @@
 .display {
-    color: white;
+    color: rgb(243, 237, 237);
     text-align: center;
 }
 
 .pig-list {
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap:wrap;
+    color: red;
+    align-items: center;
+    justify-content: center;
 }
 
+input {
+    margin: 0.6rem 0;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 10px;
+}
+
+button {
+    border: none;
+    padding:  0.8rem;
+    border-radius: 5px;
+    margin: 0.6rem 0
+  
+}
 .pig-item {
     width: 20%;
     margin: 12px;
+    padding: 10%;
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './displayPigs.css';
+import Pig from "./Pig";
 
 
 
@@ -76,7 +77,8 @@ const DisplayPigs = () => {
                 <button type="submit">add</button>
             </form>
             <div className="pig-list">{pigs.map(pig => {
-            return <li className="pig-item"><h1>{pig.name}</h1></li>
+            return < Pig name= {pig.name} sow= {pig.sow}/>
+
 
         } )}</div>
         </div>

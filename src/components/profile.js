@@ -57,6 +57,7 @@ return (
         
    
         <div className="pic-container">
+            
         <img src="https://media.licdn.com/dms/image/C5103AQFcpNGDcSRcDA/profile-displayphoto-shrink_800_800/0/1553566992650?e=1678320000&v=beta&t=LNED6pgc7gH5PC2i-U3DQlfLSa29Sbv_iOJgoNHuBH8" className="card-img-top" alt="..." />
         <h1 class="text-center">{name}</h1>
                 <h2 class="text-center">FARM OWNER</h2>
