@@ -53,6 +53,7 @@ useEffect(() => {
 return (
 
     <>
+    
     <div className="card" style={{ width: 20 + 'rem' }}>
         
    
@@ -63,9 +64,9 @@ return (
                 <h2 class="text-center">FARM OWNER</h2>
             </div>
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-            <button type="button" class="btn btn-danger">Set Status</button>
+            {/* <button type="button" class="btn btn-danger">Set Status</button>
             <button type="button" class="btn btn-warning">Edit Profile</button>
-            <button type="button" class="btn btn-success">More</button>
+            <button type="button" class="btn btn-success">More</button> */}
 </div>
             {/* <div>
                 <h1>{name}</h1>

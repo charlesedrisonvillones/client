@@ -79,13 +79,13 @@ const LoginForm = ({ setAuth }) => {
                 </form>
                 
 
-                <p className="text">OR LOGIN USING</p>
+                {/* <p className="text">OR LOGIN USING</p> */}
 
-                <div className="alt-login">
+                {/* <div className="alt-login">
                     <div className="facebook"></div>
                     <div className="google"></div>
 
-                </div>
+                </div> */}
 
             {/* div className={popupStyle}>
                     <h3>Login Failed</h3>

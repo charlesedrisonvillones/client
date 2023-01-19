@@ -4,23 +4,23 @@
     
 }
 
-.medicine-card {
+.feed-card {
     width: 18rem;
 }
 
-.add-medicine {
+.add-feed {
     display: flex;
     flex-direction: row;
 }
 
-.medicine-container {
+.feed-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: rgb(203 213 225);
 }
 
-.medicine-item {
+.feed-item {
     display: flex;
     flex-direction: row;
     margin-top: 5px;
@@ -29,7 +29,7 @@
     border-radius: 12px;
 }
 
-.medicine-item > * {
+.feed-item > * {
     flex-grow: 1;
     padding: 10px;
 }

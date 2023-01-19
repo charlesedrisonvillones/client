@@ -75,10 +75,10 @@ const DisplayFeeds = () => {
     };
 
     return (
-        <div className ="display1">
-            HELLO FEEDS
-
-            <form className="add-feeds" onSubmit={addFeeds}>
+        <>
+      
+            <div>
+            <form className="add-feeds1" onSubmit={addFeeds}>
                 <input type="text"
                        placeholder="feed name"
                        name="name"
@@ -92,7 +92,8 @@ const DisplayFeeds = () => {
                        onChange={e => onChange(e)} />
                 <button type="submit">add</button>
 
-            </form>
+            </form> </div>
+            <div>
 
             <div className="feed-container">
                 {feeds.map((feed, index) => {
@@ -104,6 +105,7 @@ const DisplayFeeds = () => {
                 } )}
             </div>
         </div>
+        </>
     )
 
 }
