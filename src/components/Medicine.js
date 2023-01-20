@@ -33,6 +33,27 @@ const Medicine = (props) => {
             console.log(error)
         }
     }
+
+const deleteMedicines = async (e) => {
+    e.preventDefault()
+    try {
+    const response = await fetch (
+        `http://localhost:8000/medicines/${props.id}`,{
+            method: "DELETE",
+            headers: {"Content-type": "application/json",
+                Authorization:localStorage.getItem('token') },
+              
+            }
+        )
+        const parseRes = await response.json()
+        
+        console.log(parseRes)
+    
+    } catch (error) {
+        console.log(error)
+    }
+
+}
 return (
 <div className="medicine-card card">
       
@@ -47,6 +68,7 @@ return (
                        value={inputs.stock}
                        onChange={e => onChange(e)} />
                 <button type="submit">save</button>
+                <button onClick={e => deleteMedicines(e)}>delete</button>
           
         </form>
       </div>
@@ -71,5 +93,7 @@ return (
 //   </div>)
 
     };
+
+
 
 export default Medicine;

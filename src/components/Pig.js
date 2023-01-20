@@ -31,6 +31,28 @@ const Pig = (props) => {
     }
   };
 
+const deletePigs  = async (e) => {
+  e.preventDefault()
+  try {
+  const response = await fetch (
+      `http://localhost:8000/pigs/${props.id}`,{
+          method: "DELETE",
+          headers: {"Content-type": "application/json",
+          Authorization:localStorage.getItem('token') },
+          
+        }
+    )
+    const parseRes = await response.json()
+    
+    console.log(parseRes)
+
+} catch (error) {
+    console.log(error)
+}
+        
+   
+};
+
   return (
     <div className="pig-card card">
       <img
@@ -61,6 +83,7 @@ const Pig = (props) => {
             </div>
           </div>
           <button type="submit">save</button>
+          <button onClick={e => deletePigs(e)}>delete</button>
         </form>
       </div>
     </div>

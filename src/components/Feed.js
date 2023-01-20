@@ -35,6 +35,28 @@ const Feed = (props) => {
         }
     }
 
+const deleteFeeds  = async (e) => {
+    e.preventDefault()
+    try {
+    const response = await fetch (
+        `http://localhost:8000/feeds/${props.id}`,{
+            method: "DELETE",
+            headers: {"Content-type": "application/json",
+             Authorization:localStorage.getItem('token') },
+          
+        }
+    )
+    const parseRes = await response.json()
+    
+    console.log(parseRes)
+
+} catch (error) {
+    console.log(error)
+}
+        
+   
+};
+
 return (
     <div className="feed-card card">
       
@@ -49,6 +71,7 @@ return (
                        value={inputs.stock}
                        onChange={e => onChange(e)} />
                 <button type="submit">save</button>
+                <button onClick={e => deleteFeeds(e)}>delete</button>
           
         </form>
       </div>
