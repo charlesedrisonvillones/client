@@ -123,10 +123,34 @@ app.get('/profile', auth, async (req, res) => {
     try {
       res.json(req.user);
     } catch (error) {
-      console.log(err);
+      console.log(error);
     }
   })
   
+
+app.get('/pigs', auth, async (req, res ) => {
+  try {
+    const pigs= await pool.query("SELECT * FROM pigs"
+  );
+
+  res.json(pigs.rows)
+  } catch (error){
+    console.log(error);
+  }
+  
+})
+
+app.post('/pigs', auth, async (req, res) => {
+  try {
+    const {name, sow, weight} = req.body
+    console.log(req.body)
+    const newPig = await pool.query ("INSERT INTO pigs (name, sow, weight) VALUES($1, $2, $3)",[name, sow, weight])
+    res.json("new Pig added")
+    
+  } catch (error) {
+    console.log(error);
+  }
+})
   pool.connect((err) => {
       if (err) {
         console.log(err.message);
@@ -137,6 +161,130 @@ app.get('/profile', auth, async (req, res) => {
         });
       }
     });
+
+app.post('/editPigs', auth, async (req, res ) => {
+    try {
+      const {weight, id} = req.body
+      
+      const editPigs= await pool.query("UPDATE pigs SET weight = $1 WHERE id=$2",[
+        weight, id
+      ])
+    
+      res.json("pigs have been edited")
+    } catch (error) {
+      console.log(error)
+    }
+  });
+
+app.delete('/pigs/:id', auth, async (req, res) => {
+  try {
+    const {id} = req.params;
+    const deletePig = await pool.query ("DELETE FROM pigs WHERE id=$1",[id]);
+    res.json("Pig was deleted")
+      
+  } catch (error) {
+    console.log(error);
+  }
+  })
+ 
+
+app.get('/feeds', auth, async (req, res ) => {
+  try {
+    const feeds= await pool.query("SELECT * FROM feeds"
+      );
+    
+    res.json(feeds.rows)
+    } catch (error){
+      console.log(error);
+    }
+      
+    })
+app.post('/editFeeds', auth, async (req, res ) => {
+  try {
+    const {stocks, name_id} = req.body
+    console.log(stocks)
+    const editFeeds= await pool.query("UPDATE feeds SET stocks = $1 WHERE name_id=$2",[
+      stocks, name_id
+    ])
+
+    res.json("feeds have been edited")
+  } catch (error) {
+    console.log(error)
+  }
+});
+
+app.post('/feeds', auth, async (req, res) => {
+  try {
+    const {name, stocks} = req.body;
+    
+    const addFeed = await pool.query ('INSERT INTO feeds (name, stocks) VALUES($1, $2)',[name, stocks])
+    res.json("new Feeds added")
+        
+      } catch (error) {
+        console.log(error);
+      }
+    })
+
+app.delete('/feeds/:name_id',  auth, async (req, res) => {
+  try {
+    const {name_id} = req.params;
+    const deleteFeed = await pool.query ("DELETE FROM feeds WHERE name_id=$1",[name_id]);
+    res.json("Feed was deleted");
+          
+      } catch (error) {
+        console.log(error);
+      }
+      })
+
+app.get('/medicines', auth, async (req, res ) => {
+  try {
+    const medicines= await pool.query("SELECT * FROM medicines"
+          );
+        
+    res.json(medicines.rows)
+    } catch (error){
+    console.log(error);
+        }
+          
+        })
+
+app.post('/editMedicines', auth, async (req, res) => {
+  try {
+    const {stocks, name_id} = req.body
+    console.log(stocks)
+    const editMedicines= await pool.query("UPDATE medicines SET stocks = $1 WHERE name_id=$2",[
+      stocks, name_id
+    ])
+
+    res.json("medicines have been edited")
+  } catch (error) {
+    console.log(error)
+  }
+});
+    
+app.post('/medicines', auth, async (req, res) => {
+  try {
+    const {medicine} = req.body
+    console.log(req.body)
+    const newMedicine = await pool.query ('INSERT INTO medicines (name) VALUES($1)',[medicine])
+    res.json("new medicines added")
+            
+    } catch (error) {
+    console.log(error);
+        }
+        })
+
+app.delete('/medicines/:name_id', auth, async (req, res) => {
+  try {
+    const {name_id} = req.params;
+    const deleteFeed = await pool.query ("DELETE FROM medicines WHERE name_id=$1",[name_id]);
+    res.json("Medicine was deleted")
+                  
+    } catch (error) {
+    console.log(error);
+        }
+        })
+
 
 
 
