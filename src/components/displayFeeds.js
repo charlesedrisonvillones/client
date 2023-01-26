@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import './displayFeeds.css';
 import Feed from "./Feed";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const DisplayFeeds = () => {
     // const [stock, setStocks] = useState([])
@@ -10,6 +12,10 @@ const DisplayFeeds = () => {
         stock: 0
     });
     const[editable, setEditable] = useState([])
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
         
    
 
@@ -75,11 +81,54 @@ const DisplayFeeds = () => {
     };
 
     return (
-        <>
+        <> <Button variant="primary" onClick={handleShow}>
+        Add Feeds
+       </Button>
       
+           
             <div>
-            <form className="add-feeds1" onSubmit={addFeeds}>
-                <input type="text"
+
+            {/* <div className="feed-container">
+                {feeds.map((feed, index) => {
+                 return (
+                    <div className="feed-item"> 
+                        <Feed id={feed.name_id} stocks={feed.stocks} name={feed.name}/>
+                    </div>
+                 )
+                } )}
+            </div> */}
+        </div>
+        <table style={{background:"white"}} class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Stock</th>
+     
+    </tr>
+  </thead>
+  <tbody>
+    {feeds.map(feed => {
+        return(<tr>
+            <th scope="row">{feed.name_id}</th>
+            <td>{feed.name}</td>
+            <td>{feed.stocks}</td>
+            
+           
+          </tr>
+          )
+
+    })}
+    
+      
+  </tbody>
+</table>
+<Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body><form onSubmit={addFeeds}>
+        <input type="text"
                        placeholder="feed name"
                        name="name"
                        value={inputs.name}
@@ -90,21 +139,24 @@ const DisplayFeeds = () => {
                        name="stock"
                        value={inputs.stock}
                        onChange={e => onChange(e)} />
-                <button type="submit">add</button>
+                
+               
 
-            </form> </div>
-            <div>
+                
+                
+            </form></Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={addFeeds}>
+            Add
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
-            <div className="feed-container">
-                {feeds.map((feed, index) => {
-                 return (
-                    <div className="feed-item"> 
-                        <Feed id={feed.name_id} stocks={feed.stocks} name={feed.name}/>
-                    </div>
-                 )
-                } )}
-            </div>
-        </div>
+
+
         </>
     )
 

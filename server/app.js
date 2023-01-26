@@ -142,9 +142,9 @@ app.get('/pigs', auth, async (req, res ) => {
 
 app.post('/pigs', auth, async (req, res) => {
   try {
-    const {name, sow, weight} = req.body
+    const {name, sow, weight, type} = req.body
     console.log(req.body)
-    const newPig = await pool.query ("INSERT INTO pigs (name, sow, weight) VALUES($1, $2, $3)",[name, sow, weight])
+    const newPig = await pool.query ("INSERT INTO pigs (name, sow, weight, type) VALUES($1, $2, $3, $4)",[name, sow, weight, type])
     res.json("new Pig added")
     
   } catch (error) {
