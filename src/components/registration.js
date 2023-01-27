@@ -90,14 +90,7 @@ const RegistrationForm = ({ setAuth }) => {
                         
                 </form>
 
-                <p className="text">OR REGISTER USING</p>
-
-                <div className="alt-login">
-                    <div className="facebook"></div>
-                    <div className="google"></div>
-
-                </div>
-                
+            
 
                 
 

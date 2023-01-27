@@ -9,13 +9,17 @@ const DisplayFeeds = () => {
     const [feeds, setFeeds] = useState ([])
     const [inputs, setInputs] = useState({
         name: "",
-        stock: 0
+        stocks: 0
     });
     const[editable, setEditable] = useState([])
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [showUpdate, setShowUpdate] = useState(false);
+
+    const handleCloseUpdate = () => setShowUpdate(false);
+    const handleShowUpdate = () => setShowUpdate(true);
         
    
 
@@ -35,9 +39,10 @@ const DisplayFeeds = () => {
             const parseRes = await response.json();
             const feedsLength = parseRes.length;
             const feedEditable = new Array(feedsLength).fill("false");
-            setEditable(feedEditable);
+            // setEditable(feedEditable);
             console.log(parseRes)
-            setFeeds(parseRes)
+            const newData = parseRes.sort((a,b) => a.name_id - b.name_id)
+            setFeeds(newData)
         } catch (error) {
             console.log(error)
         }
@@ -47,7 +52,7 @@ const DisplayFeeds = () => {
         e.preventDefault()
         try {
 
-            const body = { name: inputs.name, stocks: inputs.stock }
+            const body = { name: inputs.name, stocks: inputs.stocks }
             console.log(body)
             const response = await fetch (
                 "http://localhost:8000/feeds",{
@@ -80,6 +85,58 @@ const DisplayFeeds = () => {
         console.log(editable);
     };
 
+    const updateFeed = (name_id) => {
+        
+        const data = feeds.find(feed => feed.name_id === name_id )
+        console.log(data)
+        setInputs(data)
+        setShowUpdate(true)
+    }
+
+    const update = async (e) => {
+        e.preventDefault()
+        try {
+
+            const body = { name_id: inputs.name_id, stocks: inputs.stocks }
+            console.log(body)
+            const response = await fetch (
+                "http://localhost:8000/editFeeds",{
+                    method: "POST",
+                    headers: {"Content-type": "application/json",
+                     Authorization:localStorage.getItem('token') },
+                    body: JSON.stringify(body)
+                }
+            )
+            const parseRes = await response.json()
+            setFeeds(curFeeds => [...curFeeds, { name: inputs.name, stocks: inputs.stock }])
+            console.log(parseRes)
+        
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const deleteFeed = async (name_id) => {
+       
+        try {
+                const response = await fetch (
+                `http://localhost:8000/feeds/${name_id}`,{
+                    method: "DELETE",
+                    headers: {"Content-type": "application/json",
+                     Authorization:localStorage.getItem('token') },
+                    
+                }
+            )
+            
+           getFeeds()
+        
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+  
+
     return (
         <> <Button variant="primary" onClick={handleShow}>
         Add Feeds
@@ -104,7 +161,7 @@ const DisplayFeeds = () => {
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">Stock</th>
-     
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -113,6 +170,8 @@ const DisplayFeeds = () => {
             <th scope="row">{feed.name_id}</th>
             <td>{feed.name}</td>
             <td>{feed.stocks}</td>
+            <td> <Button variant="success" onClick={()=> updateFeed(feed.name_id)}>Update</Button><Button variant="danger" onClick={()=> deleteFeed(feed.name_id)}>Delete</Button></td>
+
             
            
           </tr>
@@ -125,7 +184,7 @@ const DisplayFeeds = () => {
 </table>
 <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>ADD FEED</Modal.Title>
         </Modal.Header>
         <Modal.Body><form onSubmit={addFeeds}>
         <input type="text"
@@ -135,9 +194,9 @@ const DisplayFeeds = () => {
                        onChange={e => onChange(e)} />
 
                 <input type="integer"
-                       placeholder="stock"
-                       name="stock"
-                       value={inputs.stock}
+                       placeholder="stocks"
+                       name="stocks"
+                       value={inputs.stocks}
                        onChange={e => onChange(e)} />
                 
                
@@ -154,6 +213,39 @@ const DisplayFeeds = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <Modal show={showUpdate} onHide={handleCloseUpdate}>
+        <Modal.Header closeButton>
+          <Modal.Title>UPDATE FEED</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <input type="text"
+                       placeholder="feed name"
+                       name="name"
+                       value={inputs.name}
+                       onChange={e => onChange(e)} />
+
+                <input type="integer"
+                       placeholder="stocks"
+                       name="stocks"
+                       value={inputs.stocks}
+                       onChange={e => onChange(e)} />
+                
+               
+
+                
+                
+           </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseUpdate}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={update}>
+            Update
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
 
 
 

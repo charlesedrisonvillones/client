@@ -76,6 +76,7 @@ const LoginForm = ({ setAuth }) => {
                         value={password} 
                         onChange={e => onChange(e)} />
                         <button type="submit" className="login-btn" onClick={popup}>LOGIN</button>
+                        <button className="login-btn" onClick={() => window.location.href="/register"}>REGISTER</button>
                 </form>
                 
 

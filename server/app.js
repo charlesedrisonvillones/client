@@ -202,7 +202,7 @@ app.get('/feeds', auth, async (req, res ) => {
 app.post('/editFeeds', auth, async (req, res ) => {
   try {
     const {stocks, name_id} = req.body
-    console.log(stocks)
+    console.log(req.body)
     const editFeeds= await pool.query("UPDATE feeds SET stocks = $1 WHERE name_id=$2",[
       stocks, name_id
     ])
@@ -228,6 +228,7 @@ app.post('/feeds', auth, async (req, res) => {
 app.delete('/feeds/:name_id',  auth, async (req, res) => {
   try {
     const {name_id} = req.params;
+    console.log(req.params)
     const deleteFeed = await pool.query ("DELETE FROM feeds WHERE name_id=$1",[name_id]);
     res.json("Feed was deleted");
           
