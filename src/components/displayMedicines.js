@@ -8,7 +8,7 @@ const DisplayMedicines = () => {
   const [medicines, setMedicines] = useState([]);
   const [inputs, setInputs] = useState({
     name: "",
-    stock: 0,
+    stocks: 0,
     expiration_date: new Date(),
   });
 
@@ -17,6 +17,10 @@ const DisplayMedicines = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [showUpdate, setShowUpdate] = useState(false);
+
+    const handleCloseUpdate = () => setShowUpdate(false);
+    const handleShowUpdate = () => setShowUpdate(true);
 
   const onChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -42,7 +46,7 @@ const DisplayMedicines = () => {
   const addMedicines = async (e) => {
     e.preventDefault();
     try {
-      const body = { name: inputs.name, stocks: inputs.stock };
+      const body = { name: inputs.name, stocks: inputs.stocks, expiration_date: inputs.expiration_date };
       console.log(body);
       const response = await fetch("http://localhost:8000/medicines", {
         method: "POST",
@@ -53,10 +57,8 @@ const DisplayMedicines = () => {
         body: JSON.stringify(body),
       });
       const parseRes = await response.json();
-      setMedicines((curMedicines) => [
-        ...curMedicines,
-        { name: inputs.name, stocks: inputs.stock },
-      ]);
+      getMedicines()
+      setShow(false)
       console.log(parseRes);
     } catch (error) {
       console.log(error);
@@ -75,6 +77,55 @@ const DisplayMedicines = () => {
     setEditable(newEditable);
     console.log(editable);
   };
+  const update = async (e) => {
+    e.preventDefault()
+    try {
+
+        const body = { name_id: inputs.name_id, stocks: inputs.stocks, expiration_date: inputs.expiration_date }
+        console.log(body)
+        const response = await fetch (
+            "http://localhost:8000/editMedicines",{
+                method: "POST",
+                headers: {"Content-type": "application/json",
+                 Authorization:localStorage.getItem('token') },
+                body: JSON.stringify(body)
+            }
+        )
+        const parseRes = await response.json()
+       getMedicines()
+        console.log(parseRes)
+    
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const deleteMedicine = async (name_id) => {
+   
+    try {
+            const response = await fetch (
+            `http://localhost:8000/medicines/${name_id}`,{
+                method: "DELETE",
+                headers: {"Content-type": "application/json",
+                 Authorization:localStorage.getItem('token') },
+                
+            }
+        )
+        
+       getMedicines()
+    
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const updateMedicines = (medicine) => {
+        
+  
+ 
+  setInputs(medicine)
+  setShowUpdate(true)
+}
   return (
     <div className="display2">
       <Button variant="primary" onClick={handleShow}>
@@ -88,6 +139,7 @@ const DisplayMedicines = () => {
             <th scope="col">Name</th>
             <th scope="col">Stock</th>
             <th scope="col">expiration_date</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -98,6 +150,7 @@ const DisplayMedicines = () => {
                 <td>{medicine.name}</td>
                 <td>{medicine.stocks}</td>
                 <td>{medicine.expiration_date}</td>
+                <td> <Button variant="success" onClick={()=> updateMedicines(medicine)}>Update</Button><Button variant="danger" onClick={()=> deleteMedicine(medicine.name_id)}>Delete</Button></td>
               </tr>
             );
           })}
@@ -105,7 +158,7 @@ const DisplayMedicines = () => {
       </table>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Add Medicine</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="add-medicine" onSubmit={addMedicines}>
@@ -120,19 +173,20 @@ const DisplayMedicines = () => {
             <input
               type="integer"
               placeholder="stock"
-              name="stock"
-              value={inputs.stock}
+              name="stocks"
+              value={inputs.stocks}
               onChange={(e) => onChange(e)}
             />
 
             <input
               type="date"
               placeholder="expiration date"
-              name="expiration date"
+              name="expiration_date"
               value={inputs.expiration_date}
-              onChange={(e) => onChange(e)}
+              onChange={(e) =>  onChange(e)}
+              
             />
-            <button type="submit">add</button>
+            
           </form>
         </Modal.Body>
         <Modal.Footer>
@@ -144,8 +198,44 @@ const DisplayMedicines = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Modal show={showUpdate} onHide={handleCloseUpdate}>
+        <Modal.Header closeButton>
+          <Modal.Title>UPDATE MEDICINES</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <input type="text"
+                       placeholder="medicine name"
+                       name="name"
+                       value={inputs.name}
+                       onChange={e => onChange(e)} />
+
+                <input type="integer"
+                       placeholder="stocks"
+                       name="stocks"
+                       value={inputs.stocks}
+                       onChange={e => onChange(e)} />
+
+       
+              
+         
+                
+               
+
+                
+                
+           </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseUpdate}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={update}>
+            Update
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
+
 
 export default DisplayMedicines;

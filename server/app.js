@@ -265,9 +265,10 @@ app.post('/editMedicines', auth, async (req, res) => {
     
 app.post('/medicines', auth, async (req, res) => {
   try {
-    const {medicine} = req.body
-    console.log(req.body)
-    const newMedicine = await pool.query ('INSERT INTO medicines (name) VALUES($1)',[medicine])
+    const {name, stocks, expiration_date} = req.body;
+    // console.log(req.body)
+    console.log(name, stocks, expiration_date)
+    const newMedicine = await pool.query('INSERT INTO medicines (name, stocks, expiration_date) VALUES($1, $2, $3)',[name, stocks, expiration_date])
     res.json("new medicines added")
             
     } catch (error) {
