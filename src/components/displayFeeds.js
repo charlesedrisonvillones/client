@@ -3,6 +3,7 @@ import './displayFeeds.css';
 import Feed from "./Feed";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 
 const DisplayFeeds = () => {
     // const [stock, setStocks] = useState([])
@@ -186,7 +187,33 @@ const DisplayFeeds = () => {
         <Modal.Header closeButton>
           <Modal.Title>ADD FEED</Modal.Title>
         </Modal.Header>
-        <Modal.Body><form onSubmit={addFeeds}>
+        <Modal.Body>
+        <Form>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Name</Form.Label>
+        <Form.Control type="text"
+                       placeholder="feed name"
+                       name="name"
+                       value={inputs.name}
+                       onChange={e => onChange(e)} />
+        
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Stocks</Form.Label>
+        <Form.Control type="integer"
+                       placeholder="stocks"
+                       name="stocks"
+                       value={inputs.stocks}
+                       onChange={e => onChange(e)}  />
+      </Form.Group>
+
+      
+      
+        
+     
+    </Form>
+            {/* <form onSubmit={addFeeds}>
         <input type="text"
                        placeholder="feed name"
                        name="name"
@@ -203,7 +230,8 @@ const DisplayFeeds = () => {
 
                 
                 
-            </form></Modal.Body>
+            </form> */}
+            </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close

@@ -164,10 +164,11 @@ app.post('/pigs', auth, async (req, res) => {
 
 app.post('/editPigs', auth, async (req, res ) => {
     try {
-      const {weight, id} = req.body
+      const {weight, id, type} = req.body
+      console.log(req.body)
       
-      const editPigs= await pool.query("UPDATE pigs SET weight = $1 WHERE id=$2",[
-        weight, id
+      const editPigs= await pool.query("UPDATE pigs SET weight = $1,type = $3 WHERE id=$2",[
+        weight, id, type
       ])
     
       res.json("pigs have been edited")
@@ -179,8 +180,9 @@ app.post('/editPigs', auth, async (req, res ) => {
 app.delete('/pigs/:id', auth, async (req, res) => {
   try {
     const {id} = req.params;
+    console.log(req.params)
     const deletePig = await pool.query ("DELETE FROM pigs WHERE id=$1",[id]);
-    res.json("Pig was deleted")
+    res.json("Pig was deleted");
       
   } catch (error) {
     console.log(error);

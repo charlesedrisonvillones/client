@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Medicine from "./Medicine";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Form from 'react-bootstrap/Form';
 
 const DisplayMedicines = () => {
   const [medicines, setMedicines] = useState([]);
@@ -161,7 +162,39 @@ const updateMedicines = (medicine) => {
           <Modal.Title>Add Medicine</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form className="add-medicine" onSubmit={addMedicines}>
+        <Form>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Name</Form.Label>
+        <Form.Control type="text"
+              placeholder="medicine name"
+              name="name"
+              value={inputs.name}
+              onChange={(e) => onChange(e)}/>
+        
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Stocks</Form.Label>
+        <Form.Control type="integer"
+              placeholder="stock"
+              name="stocks"
+              value={inputs.stocks}
+              onChange={(e) => onChange(e)} />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Expiration date</Form.Label>
+        <Form.Control type="date"
+              placeholder="expiration date"
+              name="expiration_date"
+              value={inputs.expiration_date}
+              onChange={(e) =>  onChange(e)}  />
+      </Form.Group>
+      
+        
+     
+    </Form>
+          {/* <form className="add-medicine" onSubmit={addMedicines}>
             <input
               type="text"
               placeholder="medicine name"
@@ -187,7 +220,7 @@ const updateMedicines = (medicine) => {
               
             />
             
-          </form>
+          </form> */}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
