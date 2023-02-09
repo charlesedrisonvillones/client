@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import "./loginform.css";
 import { Link } from "react-router-dom";
+
 
 
 const LoginForm = ({ setAuth }) => {
@@ -55,7 +56,27 @@ const LoginForm = ({ setAuth }) => {
             console.log(error.message)
         }
     }
+//   useEffect(async ()=>  {
+// //     const token = localStorage.getItem("token")
+// //     try { 
+// //       const response = await fetch(
+// //           "http://localhost:8000/verify",{
+// //               method: "POST",
+// //               headers: { Authorization:token }
+// //           }
+     
+// //       )
+// //       const result = await response.json();
+// //       setAuth(true)
+// //       console.log(result)
+     
+      
+// //   } catch (error) {
+// //       console.log(error)
+// //   }
+// }
 
+//   ,[])
     return (
         <div className="page">
             <div className="cover">

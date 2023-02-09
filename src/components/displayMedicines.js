@@ -4,6 +4,7 @@ import Medicine from "./Medicine";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from 'react-bootstrap/Form';
+import {format} from 'date-fns'
 
 const DisplayMedicines = () => {
   const [medicines, setMedicines] = useState([]);
@@ -128,18 +129,18 @@ const updateMedicines = (medicine) => {
   setShowUpdate(true)
 }
   return (
-    <div className="display2">
+    <div>
       <Button variant="primary" onClick={handleShow}>
         Add Medicines
       </Button>
-      HELLO MEDICINES
+     
       <table style={{ background: "white" }} class="table">
         <thead class="thead-dark">
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Stock</th>
-            <th scope="col">expiration_date</th>
+            <th scope="col">Expiration Date</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -150,7 +151,7 @@ const updateMedicines = (medicine) => {
                 <th scope="row">{medicine.name_id}</th>
                 <td>{medicine.name}</td>
                 <td>{medicine.stocks}</td>
-                <td>{medicine.expiration_date}</td>
+                <td>{format(new Date(medicine.expiration_date),"yyyy-MM-dd") }</td>
                 <td> <Button variant="success" onClick={()=> updateMedicines(medicine)}>Update</Button><Button variant="danger" onClick={()=> deleteMedicine(medicine.name_id)}>Delete</Button></td>
               </tr>
             );

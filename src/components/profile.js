@@ -7,6 +7,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 
 
+
 const Dashboard = ({ setAuth }) => {
     const [name, setName] = useState("");
     
@@ -49,6 +50,10 @@ useEffect(() => {
 }, [])
 
 
+  
+
+
+
 
 return (
 
@@ -89,6 +94,9 @@ return (
             
         </div>
     </>
+
+
+
    
 
 )}

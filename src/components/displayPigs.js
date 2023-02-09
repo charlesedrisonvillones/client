@@ -135,52 +135,10 @@ const DisplayPigs = () => {
        Add Pigs
       </Button>
         <div className="display">
-            HELLO PIGS
+          
            
-            {/* <form onSubmit={addPigs}>
-                <input  type="text" 
-                        placeholder="name"
-                        name="name" 
-                        value={inputs.name} 
-                        onChange={e => onChange(e)} />
-                
-                <input  type="text" 
-                        placeholder="sow"
-                        name="sow" 
-                        value={inputs.sow} 
-                        onChange={e => onChange(e)} />
-                <label for="pigs">Choose type:</label>
-
-                    <select  onChange={e => onChange(e)} name="type" id="pigs">
-                    <option value="sow">Sow</option>
-                    <option value="hog">Hog</option>
-                    <option value="boar">Boar</option>
-
-
-  
-                    </select>
-
-                <input  type="number" 
-                        placeholder="weight"
-                        name="weight" 
-                        value={inputs.weight} 
-                        onChange={e => onChange(e)} />
-               
-
-                
-                <button type="submit">add</button>
-            </form>
-             */}
-            {/* <div className="pig-list">{pigs.map(pig => {
-            return < Pig name= {pig.name} sow= {pig.sow} weight= {pig.weight} id= {pig.id}/>
-
-
-        } )}</div> */}
-        <div style={{width:"1000px", backgroundColor:"white", justifyContent:"center", display:"flex"}} className="Dashboard-container">
-            {/* <DisplayPigs></DisplayPigs>
-            <DisplayMedicines></DisplayMedicines>
-            <DisplayFeeds></DisplayFeeds> */}
-            <table class="table">
+            
+            <table class="table" style={{background:"white"}}>
   <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
@@ -209,7 +167,7 @@ const DisplayPigs = () => {
 
 
         </div>
-        </div>
+      
         
 
       <Modal show={show} onHide={handleClose}>
@@ -317,33 +275,42 @@ const DisplayPigs = () => {
           <Modal.Title>UPDATE PIGS</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <input  type="text" 
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Stocks</Form.Label>
+        <Form.Control type="text" 
                         placeholder="name"
                         name="name" 
                         value={inputs.name} 
                         onChange={e => onChange(e)} />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Type of Pigs</Form.Label>
+        <Form.Select size="lg" onChange={e => onChange(e)} name="type" id="pigs">
+        <option> select</option>
+        <option value="sow">Sow</option>
+<option value="hog">Hog</option>
+<option value="boar">Boar</option>
+
+      </Form.Select>
+      
+      </Form.Group>
+        
                 
                 {/* <input  type="text" 
                         placeholder="sow"
                         name="sow" 
                         value={inputs.sow} 
                         onChange={e => onChange(e)} /> */}
-                <label for="pigs">Choose type:</label>
-
-                    <select value={inputs.type} onChange={e => onChange(e)} name="type" id="pigs">
-                    <option value="sow">Sow</option>
-                    <option value="hog">Hog</option>
-                    <option value="boar">Boar</option>
-
-
-  
-                    </select>
-
-                <input  type="number" 
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Weight</Form.Label>
+        <Form.Control type="number" 
                         placeholder="weight"
                         name="weight" 
                         value={inputs.weight} 
-                        onChange={e => onChange(e)} />
+                        onChange={e => onChange(e)} /> 
+      </Form.Group>
+                
                 
 
                 

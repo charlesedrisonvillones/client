@@ -21,6 +21,7 @@ import { auth } from "./middleware/auth.js";
 import  express  from "express";
 import bcrypt from "bcrypt" 
 import cors from "cors"
+import jwt from "jsonwebtoken"
 
 
 
@@ -117,6 +118,24 @@ app.post("/login", async(req,res) => {
         console.error(err.message);
         res.status(500).send("Server Error");
     }
+})
+
+app.get("/verify", async (req, res ) => {
+  try {
+    console.log(req.query, process.env.jwtSecret)
+    
+    jwt.verify(req.query.token, process.env.jwtSecret, (err, user) => {
+      console.log(err)
+      if(err) return res.json(false)
+      console.log("b")
+    res.json(true)
+      
+      
+  } )
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+}
 })
  
 app.get('/profile', auth, async (req, res) => {
