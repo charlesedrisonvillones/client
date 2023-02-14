@@ -30,7 +30,7 @@ const DisplayMedicines = () => {
   const { medicine } = inputs;
   const getMedicines = async () => {
     try {
-      const response = await fetch("http://localhost:8000/medicines", {
+      const response = await fetch("http://localhost:8000/api/medicines", {
         method: "GET",
         headers: { Authorization: localStorage.getItem("token") },
       });
@@ -50,7 +50,7 @@ const DisplayMedicines = () => {
     try {
       const body = { name: inputs.name, stocks: inputs.stocks, expiration_date: inputs.expiration_date };
       console.log(body);
-      const response = await fetch("http://localhost:8000/medicines", {
+      const response = await fetch("http://localhost:8000/api/medicines", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -86,7 +86,7 @@ const DisplayMedicines = () => {
         const body = { name_id: inputs.name_id, stocks: inputs.stocks, expiration_date: inputs.expiration_date }
         console.log(body)
         const response = await fetch (
-            "http://localhost:8000/editMedicines",{
+            "http://localhost:8000/api/editMedicines",{
                 method: "POST",
                 headers: {"Content-type": "application/json",
                  Authorization:localStorage.getItem('token') },
@@ -95,6 +95,7 @@ const DisplayMedicines = () => {
         )
         const parseRes = await response.json()
        getMedicines()
+       handleCloseUpdate()
         console.log(parseRes)
     
     } catch (error) {
@@ -106,7 +107,7 @@ const deleteMedicine = async (name_id) => {
    
     try {
             const response = await fetch (
-            `http://localhost:8000/medicines/${name_id}`,{
+            `http://localhost:8000/api/medicines/${name_id}`,{
                 method: "DELETE",
                 headers: {"Content-type": "application/json",
                  Authorization:localStorage.getItem('token') },

@@ -15,7 +15,7 @@ const Pig = (props) => {
     try {
       const body = { id: props.id, weight: inputs.weight };
       console.log(body);
-      const response = await fetch("http://localhost:8000/editPigs", {
+      const response = await fetch("http://localhost:8000/api/editPigs", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -35,7 +35,7 @@ const deletePigs  = async (e) => {
   e.preventDefault()
   try {
   const response = await fetch (
-      `http://localhost:8000/pigs/${props.id}`,{
+      `http://localhost:8000/api/pigs/${props.id}`,{
           method: "DELETE",
           headers: {"Content-type": "application/json",
           Authorization:localStorage.getItem('token') },

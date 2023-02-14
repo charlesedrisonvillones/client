@@ -19,7 +19,7 @@ const Feed = (props) => {
             const body = { name_id:props.id, stocks: inputs.stock }
             console.log(body)
             const response = await fetch (
-                "http://localhost:8000/editFeeds",{
+                "http://localhost:8000/api/editFeeds",{
                     method: "POST",
                     headers: {"Content-type": "application/json",
                      Authorization:localStorage.getItem('token') },
@@ -39,7 +39,7 @@ const deleteFeeds  = async (e) => {
     e.preventDefault()
     try {
     const response = await fetch (
-        `http://localhost:8000/feeds/${props.id}`,{
+        `http://localhost:8000/api/feeds/${props.id}`,{
             method: "DELETE",
             headers: {"Content-type": "application/json",
              Authorization:localStorage.getItem('token') },

@@ -5,7 +5,14 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
+const initialState = {
+  name: "",
+  sow : false,
+  weight: 0.0,
+  type: ""
+  
 
+};
 
 
 const DisplayPigs = () => {
@@ -15,14 +22,7 @@ const DisplayPigs = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [inputs, setInputs] = useState({
-        name: "",
-        sow : false,
-        weight: 0.0,
-        type: ""
-        
-
-    });
+    const [inputs, setInputs] = useState(initialState)
     const [showUpdate, setShowUpdate] = useState(false);
 
     const handleCloseUpdate = () => setShowUpdate(false);
@@ -35,7 +35,7 @@ const DisplayPigs = () => {
     const getPigs = async () => {
         try { 
             const response = await fetch(
-                "http://localhost:8000/pigs",{
+                "http://localhost:8000/api/pigs",{
                     method: "GET",
                     headers: { Authorization:localStorage.getItem('token') }
                 }
@@ -57,7 +57,7 @@ const DisplayPigs = () => {
             const body = { name, sow, weight, type }
             console.log(body)
             const response = await fetch(
-                "http://localhost:8000/pigs",{
+                "http://localhost:8000/api/pigs",{
                     method: "POST",
                     headers: {"Content-type": "application/json",
                      Authorization:localStorage.getItem('token') },
@@ -69,6 +69,7 @@ const DisplayPigs = () => {
             const parseRes= await response.json()
             getPigs()
             handleClose()
+            setInputs(initialState)
             console.log(parseRes)
             
            
@@ -87,7 +88,7 @@ const DisplayPigs = () => {
           const body = { id: inputs.id, sow: inputs.sow, weight: inputs.weight, type: inputs.type }
           console.log(body)
           const response = await fetch (
-              "http://localhost:8000/editPigs",{
+              "http://localhost:8000/api/editPigs",{
                   method: "POST",
                   headers: {"Content-type": "application/json",
                    Authorization:localStorage.getItem('token') },
@@ -108,7 +109,7 @@ const DisplayPigs = () => {
      
       try {
               const response = await fetch (
-              `http://localhost:8000/pigs/${id}`,{
+              `http://localhost:8000/api/pigs/${id}`,{
                   method: "DELETE",
                   headers: {"Content-type": "application/json",
                    Authorization:localStorage.getItem('token') },
@@ -286,7 +287,7 @@ const DisplayPigs = () => {
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Type of Pigs</Form.Label>
-        <Form.Select size="lg" onChange={e => onChange(e)} name="type" id="pigs">
+        <Form.Select size="lg" onChange={e => onChange(e)} name="type" id="pigs" value={inputs.type}>
         <option> select</option>
         <option value="sow">Sow</option>
 <option value="hog">Hog</option>

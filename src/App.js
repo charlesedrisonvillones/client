@@ -50,7 +50,7 @@ const verify = async() => {
   console.log("b")
   try { 
     const response = await fetch(
-        `http://localhost:8000/verify?token=${token}`,{
+        `http://localhost:8000/api/verify?token=${token}`,{
             method: "GET",
             headers: {"Content-type": "application/json"},
             

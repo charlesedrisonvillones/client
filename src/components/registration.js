@@ -30,7 +30,7 @@ const RegistrationForm = ({ setAuth }) => {
 
             //fetch api for POST method
             const response = await fetch(
-                "http://localhost:8000/register",
+                "http://localhost:8000/api/register",
                 {
                     method: "POST",
                     headers: {

@@ -5,13 +5,15 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
+const initialState = {
+  name: "",
+  stocks: 0
+};
+
 const DisplayFeeds = () => {
     // const [stock, setStocks] = useState([])
     const [feeds, setFeeds] = useState ([])
-    const [inputs, setInputs] = useState({
-        name: "",
-        stocks: 0
-    });
+    const [inputs, setInputs] = useState(initialState)
     const[editable, setEditable] = useState([])
     const [show, setShow] = useState(false);
 
@@ -32,7 +34,7 @@ const DisplayFeeds = () => {
     const getFeeds = async () => {
         try {
             const response = await fetch (
-                "http://localhost:8000/feeds",{
+                "http://localhost:8000/api/feeds",{
                     method: "GET",
                     headers: { Authorization:localStorage.getItem('token') }
                 }
@@ -56,7 +58,7 @@ const DisplayFeeds = () => {
             const body = { name: inputs.name, stocks: inputs.stocks }
             console.log(body)
             const response = await fetch (
-                "http://localhost:8000/feeds",{
+                "http://localhost:8000/api/feeds",{
                     method: "POST",
                     headers: {"Content-type": "application/json",
                      Authorization:localStorage.getItem('token') },
@@ -64,7 +66,9 @@ const DisplayFeeds = () => {
                 }
             )
             const parseRes = await response.json()
-            setFeeds(curFeeds => [...curFeeds, { name: inputs.name, stocks: inputs.stock }])
+            getFeeds()
+            setInputs(initialState)
+            handleClose()
             console.log(parseRes)
         
         } catch (error) {
@@ -101,7 +105,7 @@ const DisplayFeeds = () => {
             const body = { name_id: inputs.name_id, stocks: inputs.stocks }
             console.log(body)
             const response = await fetch (
-                "http://localhost:8000/editFeeds",{
+                "http://localhost:8000/api/editFeeds",{
                     method: "POST",
                     headers: {"Content-type": "application/json",
                      Authorization:localStorage.getItem('token') },
@@ -121,7 +125,7 @@ const DisplayFeeds = () => {
        
         try {
                 const response = await fetch (
-                `http://localhost:8000/feeds/${name_id}`,{
+                `http://localhost:8000/api/feeds/${name_id}`,{
                     method: "DELETE",
                     headers: {"Content-type": "application/json",
                      Authorization:localStorage.getItem('token') },

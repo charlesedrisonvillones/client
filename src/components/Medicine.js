@@ -18,7 +18,7 @@ const Medicine = (props) => {
             const body = { name_id:props.id, stocks: inputs.stock }
             console.log(body)
             const response = await fetch (
-                "http://localhost:8000/editMedicines",{
+                "http://localhost:8000/api/editMedicines",{
                     method: "POST",
                     headers: {"Content-type": "application/json",
                      Authorization:localStorage.getItem('token') },
@@ -38,7 +38,7 @@ const deleteMedicines = async (e) => {
     e.preventDefault()
     try {
     const response = await fetch (
-        `http://localhost:8000/medicines/${props.id}`,{
+        `http://localhost:8000/api/medicines/${props.id}`,{
             method: "DELETE",
             headers: {"Content-type": "application/json",
                 Authorization:localStorage.getItem('token') },
