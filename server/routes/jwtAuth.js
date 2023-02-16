@@ -27,9 +27,9 @@ router.post("/login", async(req,res) => {
         if (user.rows[0].length < 0) {
              return res.status(401).send("Username or password is incorrect");
         }
-        console.log("b")
-        console.log(password)
-        console.log(user.rows[0])
+        // console.log("b")
+        // console.log(password)
+        // console.log(user.rows[0])
 
         const validPassword = await bcrypt.compare(password, user.rows[0].user_password)
        
@@ -48,12 +48,12 @@ router.post("/login", async(req,res) => {
 
 router.get("/verify", async (req, res ) => {
   try {
-    console.log(req.query, process.env.jwtSecret)
+    // console.log(req.query, process.env.jwtSecret)
     
     jwt.verify(req.query.token, process.env.jwtSecret, (err, user) => {
       console.log(err)
       if(err) return res.json(false)
-      console.log("b")
+    //   console.log("b")
     res.json(true)
       
       
