@@ -6,6 +6,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Dashboard.css";
 import Card from "react-bootstrap/Card";
 import React, { useEffect, useState } from "react";
+import { Line } from 'react-chartjs-2';
 
 const Dashboard = () => {
   const [countFeeds, setCountFeeds] = useState(0);
@@ -19,7 +20,7 @@ const Dashboard = () => {
       });
       const parseRes = await response.json();
       setCountFeeds(parseRes.count);
-      console.log(parseRes)
+      console.log(parseRes);
     } catch (error) {
       console.log(error);
     }
@@ -55,6 +56,80 @@ const Dashboard = () => {
     getCountMedicines();
     getCountPigs();
   }, []);
+
+  const [chartData, setChartData] = useState({});
+
+  useEffect(() => {
+    const data = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [
+        {
+          label: 'My First Dataset',
+          data: [65, 59, 80, 81, 56, 55, 40],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }
+      ]
+    };
+
+    const options = {
+      scales: {
+        xAxes: [
+          {
+            type: 'category',
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+          }
+        ],
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      }
+    };
+
+    setChartData({ data, options });
+  }, []);
+
+  // const data = {
+  //   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  //   datasets: [
+  //     {
+  //       label: "First dataset",
+  //       data: [33, 53, 85, 41, 44, 65],
+  //       fill: true,
+  //       backgroundColor: "rgba(75,192,192,0.2)",
+  //       borderColor: "rgba(75,192,192,1)"
+  //     },
+  //     {
+  //       label: "Second dataset",
+  //       data: [33, 25, 35, 51, 54, 76],
+  //       fill: false,
+  //       borderColor: "#742774"
+  //     }
+  //   ]
+  // };
+  // const options = {
+  //   scales: {
+  //     xAxes: [
+  //       {
+  //         type: 'category',
+  //         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  //       },
+  //     ],
+  //     yAxes: [
+  //       {
+  //         ticks: {
+  //           beginAtZero: true,
+  //         },
+  //       },
+  //     ],
+  //   },
+  // };
+  
 
   return (
     <div style={{ display: "flex", paddingTop: "50px" }}>
@@ -109,6 +184,8 @@ const Dashboard = () => {
           </Card.Text>
         </Card.Body>
       </Card>
+      {/* <Line data={data}  /> */}
+      {/* <Line data={chartData.data} options={chartData.options} /> */}
     </div>
   );
 };
